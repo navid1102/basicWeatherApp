@@ -1,9 +1,11 @@
 package com.nf.sun.fragments;
 
+import android.app.NotificationManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -41,6 +45,8 @@ public class WetherDataFragment extends Fragment {
 public  static final String URL="http://api.openweathermap.org/";
 
     String API_KEY="b5f8100428ca05de43f7ffed109ceaf3";
+
+    public static String temp;
 
 
    // WetherData wetherData;
@@ -74,6 +80,9 @@ public  static final String URL="http://api.openweathermap.org/";
         View view= inflater.inflate(R.layout.fragment_wether_data, container, false);
 
         ButterKnife.bind(this,view);
+
+
+
 
         double s1=((gpsTracker.getLatitude()));
         double s2=((gpsTracker.getLongitude()));
@@ -124,7 +133,7 @@ public  static final String URL="http://api.openweathermap.org/";
 
                     com.nf.sun.jsonClasses.CityName.Example example=response.body();
                     String cityName=example.getName();
-                    String temp=example.getMain().getTemp().toString();
+                    temp=example.getMain().getTemp().toString();
                     String minTemp=example.getMain().getTempMin().toString();
                     String maxTemp=example.getMain().getTempMax().toString();
                    // List<Weather> data=example.getWeather().get(1);

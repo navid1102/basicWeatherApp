@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.nf.sun.R;
 import com.nf.sun.adapter.ViewPagerListAdapter;
+import com.nf.sun.utils.ApplicationPermission;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import butterknife.BindView;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
+
 
 
         ViewPagerListAdapter viewPagerListAdapter=new ViewPagerListAdapter(getFragmentManager());

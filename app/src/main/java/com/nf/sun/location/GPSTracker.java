@@ -27,7 +27,7 @@ public class GPSTracker extends Service implements LocationListener {
     public boolean isnetworkEnabled=false;
     public boolean isGPSEnabled=false;
 
-   public boolean canGetLocation=false;
+    public boolean canGetLocation=false;
 
     Location location;
 
@@ -58,33 +58,33 @@ public class GPSTracker extends Service implements LocationListener {
             canGetLocation=true;
 
             if (isnetworkEnabled){
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,minTime,minPlace,this);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,minTime,minPlace,this);
 
-            if (locationManager!=null){
+                if (locationManager!=null){
 
-                location=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    location=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-                if (location!=null){
-                    latitude=location.getLatitude();
-                    longitude=location.getLongitude();
+                    if (location!=null){
+                        latitude=location.getLatitude();
+                        longitude=location.getLongitude();
+                    }
                 }
+
             }
 
-        }
 
+            if (isGPSEnabled){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,minTime,minPlace,this);
 
-        if (isGPSEnabled){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,minTime,minPlace,this);
+                if (locationManager!=null){
+                    location=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            if (locationManager!=null){
-                location=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                if (location!=null){
-                    latitude=location.getLatitude();
-                    longitude=location.getLongitude();
+                    if (location!=null){
+                        latitude=location.getLatitude();
+                        longitude=location.getLongitude();
+                    }
                 }
             }
-        }
         }
 
         return location;

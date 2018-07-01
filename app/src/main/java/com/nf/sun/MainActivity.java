@@ -2,28 +2,35 @@ package com.nf.sun;
 
 import android.app.Application;
 import android.app.Fragment;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.nf.sun.R;
 import com.nf.sun.adapter.ViewPagerListAdapter;
 import com.nf.sun.fragments.AddLocationFragment;
 import com.nf.sun.fragments.CountryCardFragment;
 import com.nf.sun.fragments.HomeFragment;
 import com.nf.sun.fragments.UpDateFragment;
+import com.nf.sun.fragments.WetherDataFragment;
+import com.nf.sun.jsonClasses.CityName.Example;
 import com.nf.sun.location.GPSTracker;
 import com.nf.sun.utils.ApplicationPermission;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -44,9 +52,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottom_navigation)BottomNavigationView bottomNavigationView;*/
 
     BottomNavigationView bottomNavigationView;
-    GPSTracker gpsTracker;
 
-   private static Retrofit retrofit=null;
+    private static Retrofit retrofit=null;
 
     double lat,lng;
 
@@ -56,47 +63,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // ButterKnife.bind(this);
-        gpsTracker=new GPSTracker(getApplicationContext());
         bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottom_navigation);
-
-
-        LocationManager locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean GPSEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!GPSEnabled){
-
-            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-
-
-
 
         getSupportFragmentManager().beginTransaction().replace(R.id.framlayout,new HomeFragment()).commit();
 
-                     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                         @Override
-                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        isconected();
 
-                             android.support.v4.app.Fragment fragment=null;
+        NotificationCompat.Builder notif=new NotificationCompat.Builder(getApplicationContext(),"nn");
+        notif.setContentTitle("temperature");
+        notif.setContentText("new temp:");
+        notif.setSmallIcon(R.mipmap.ic_launcher_round);
+        notif.setAutoCancel(true);
+        notif.setVibrate(new long[]{100,200,100,200});
 
-                             switch (item.getItemId()){
-                                 case R.id.bottom_home:
-                                     fragment=new HomeFragment();
+        NotificationManager notificationManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0,notif.build());
 
-                                     break;
 
-                                 case R.id.bottom_country_cards:
-                                     fragment=new CountryCardFragment();
-                                     break;
 
-                                 case R.id.bottom_update:
-                                     fragment=new UpDateFragment();
-                                     break;
-                             }
-                             getSupportFragmentManager().beginTransaction().replace(R.id.framlayout,fragment).commit();
-                             return false;
-                         }
-                     });
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                android.support.v4.app.Fragment fragment=null;
+
+                switch (item.getItemId()){
+                    case R.id.bottom_home:
+                        fragment=new HomeFragment();
+
+                        break;
+
+                    case R.id.bottom_country_cards:
+                        fragment=new CountryCardFragment();
+                        break;
+
+                    case R.id.bottom_update:
+                        fragment=new UpDateFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.framlayout,fragment).commit();
+                return false;
+            }
+        });
 
 
 
@@ -144,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 Address address=addressList.get(0);
                 String country=address.getCountryCode();
 
-               String countryName=address.getCountryName();
+                String countryName=address.getCountryName();
 
 
 
@@ -160,5 +168,19 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         location();
+    }
+
+    public void isconected()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo!=null && networkInfo.isConnected()){
+            Toast.makeText(getApplicationContext(),"connected",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "خطا در اتصال به اینترنت!", Toast.LENGTH_LONG).show();
+
+        }
     }
 }
