@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         boolean GPSEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!GPSEnabled){
 
-            Intent settingIntent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(settingIntent);
+            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
         }
 
 

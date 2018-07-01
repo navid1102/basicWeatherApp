@@ -16,7 +16,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-import static com.nf.sun.retrofit.ServiceGenerator.BASE_URL_RETROFIT;
 
 /**
  * Created by KarAmad-user on 6/5/2018.
