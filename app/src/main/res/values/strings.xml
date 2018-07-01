@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Sun</string>
+    <string name="status">statusbar</string>
+    <string name="setting">setting</string>
+    <string name="map">map</string>
+    <string name="religious_time">religiousTimes</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

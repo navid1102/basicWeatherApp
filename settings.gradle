@@ -1,0 +1,3 @@
+include ':app'
+include ':indicator'
+include ':library'

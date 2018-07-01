@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:title="@string/setting"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:id="@+id/slide_setting"/>
+
+    <item
+        android:title="@string/map"
+        android:icon="@drawable/ic_map_black_24dp"
+        android:id="@+id/slide_map"/>
+
+    <item
+        android:title="@string/religious_time"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:id="@+id/slide_religious"/>
+
+    <item
+        android:title="@string/status"
+        android:id="@+id/slide_status"/>
+
+
+</menu>

@@ -1,0 +1,109 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nf.sun.fragments.WetherDataFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@android:color/transparent">
+
+       <TextView
+           android:text=""
+           android:id="@+id/city_field"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentTop="true"
+           android:layout_centerHorizontal="true"
+           android:textAppearance="?android:attr/textAppearanceLarge" />
+
+       <TextView
+           android:text=""
+           android:id="@+id/addres"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/city_field"
+           android:layout_centerHorizontal="true"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:textSize="13sp" />
+
+       <com.nf.sun.coustomView.AwesomeView
+           android:text=""
+           android:id="@+id/weather_icon"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:layout_centerHorizontal="true"
+           android:textAppearance="?android:attr/textAppearanceLarge"
+           android:textSize="70sp"
+           />
+
+
+
+
+
+
+
+       <TextView
+           android:text=""
+           android:id="@+id/current_temperature_field"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+           android:textAppearance="?android:attr/textAppearanceLarge"
+           android:layout_marginBottom="15dp"
+           android:textSize="40sp" />
+
+
+
+       <com.nf.sun.coustomView.AwesomeView
+           android:text="@string/wi_celsius"
+           android:id="@+id/celsius_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@id/current_temperature_field"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="15dp"
+           android:textSize="40sp"/>
+
+
+
+       <TextView
+           android:text=""
+           android:id="@+id/max_temp"
+           android:gravity="bottom"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@id/celsius_text"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="45dp"
+           android:layout_marginLeft="10dp"/>
+
+       <TextView
+           android:text=""
+           android:id="@+id/min_temp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="30dp"
+           android:layout_toRightOf="@id/celsius_text"
+           android:layout_marginLeft="10dp"
+          />
+
+
+
+       <TextView
+           android:text=""
+           android:id="@+id/details_field"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/weather_icon"
+           android:layout_centerHorizontal="true"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           />
+
+   </RelativeLayout>
+
+</FrameLayout>
